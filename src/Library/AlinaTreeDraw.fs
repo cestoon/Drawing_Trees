@@ -1,54 +1,16 @@
 namespace Library
 
-// Representation of binary tree
-// type Tree<'a> =
-//     | Lf
-//     | Br of Tree<'a> * 'a * Tree<'a>
-
-
-// A node consists of a value (of type ’a) and a list of subtrees
-// type Tree<'a> =
-//     | Leaf
-//     | Node of 'a * (Tree<'a> list)
-
-
-
 type Tree<'a> = Node of 'a * (Tree<'a> list)
-
-
-// SML
-// fun movetree (Node((label, x), subtrees), x’ : real) =
-// Node((label, x+x’), subtrees)
-
-let rec movetree (Node((label, x: float), subtrees), y: float) = Node((label, x + y), subtrees)
-
-// let rec movetree (node: ('a * float) Tree, x': float) : ('a * float) Tree =
-//     match node with
-//     | Node((label, x), subtrees) ->
-//         let updatedSubtrees = List.map (fun subtree -> movetree (subtree, x')) subtrees
-//         Node((label, x + x'), updatedSubtrees)
-
 
 type Extent = (float * float) list
 
-// fun moveextent (e : Extent, x) = map (fn (p,q) => (p+x,q+x)) e
+let rec movetree (Node((label, x: float), subtrees), y: float) = Node((label, x + y), subtrees)
 
 let moveextent (e: Extent, x) : Extent = List.map (fun (p, q) -> p + x, q + x) e
-
-// let moveextent ((e: Extent), x: float) : Extent =
-//     List.map (fun (p, q) -> (p + x, q + x)) e
-
-
 
 // Merge two non-overlapping extents by
 // picking the leftmost positions of the ﬁrst
 // extent and the rightmost positions of the second
-
-
-// SML code
-// fun merge ([], qs) = qs
-// | merge (ps, []) = ps
-// | merge ((p,_)::ps, (_,q)::qs) = (p,q) :: merge (ps, qs)
 
 let rec merge (ps, qs) =
     match (ps, qs) with
@@ -57,7 +19,7 @@ let rec merge (ps, qs) =
     | ((p, _) :: ps, (_, q) :: qs) -> (p, q) :: merge (ps, qs)
 
 
-// This operation can be extended to a list of extents by the following function:
+// Extend merge to a list of extents by the following function:
 
 let mergelist es =
     List.fold (fun acc ex -> merge (acc, ex)) [] es
@@ -66,23 +28,8 @@ let mergelist es =
 
 let rmax (p: float, q: float) = if p > q then p else q
 
-// try with match
-// let ordText x y = match compare x y with
-// | t when t > 0 -> "greater"
-// | 0
-// -> "equal"
-// | _
-// -> "less";;
-// val ordText : ’a -> ’a -> string when ’a : comparison
-
 // The function accepts two extents as arguments
 // and returns the minimum possible distance between the two root nodes
-
-// let rec fit (ps, qs) =
-//     match (ps, qs) with
-//     |((p,_)::ps, (_,q)::qs) -> rmax(fit (ps,qs), p - q + 1.0)
-//     | _ -> 0.0
-
 
 let rec fit =
     function
@@ -131,6 +78,7 @@ let fitlist es =
     List.map mean (List.zip (fitlistl es) (fitlistr es))
 
 
+// Now compbining all the functions
 
 let design tree =
     let rec design' (Node(label, subtrees)) =
@@ -145,6 +93,7 @@ let design tree =
 
     fst (design' tree)
 
+// Functions to reflect the tree to be used later
 
 let rec reflect (Node(v, subtrees)) =
     Node(v, List.map reflect (rev subtrees))
