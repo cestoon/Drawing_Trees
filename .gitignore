@@ -452,3 +452,8 @@ bower_components
 
 ### WebSharper ###
 Scripts/
+
+
+## Added By group
+# Don't include scartch files
+**/scratch.fs[x] 
