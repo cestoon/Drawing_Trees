@@ -13,4 +13,8 @@
     <ProjectReference Include="..\Library\Library.fsproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Plotly.NET" Version="4.0.0" />
+  </ItemGroup>
+
 </Project>
