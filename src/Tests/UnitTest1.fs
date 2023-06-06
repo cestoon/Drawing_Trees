@@ -4,29 +4,12 @@ open NUnit.Framework
 open FsCheck
 open FsCheck.NUnit
 open Library.TreeDesign
+open TGenerators
 
 [<SetUp>]
-let Setup () =
-    ()
+let Setup () = ()
 
-[<Test>]
-let Test1 () =
-    printfn "123"
-    Assert.Pass()
-
-
-type TreeDesignTests() = 
-
-    [<Property>]
-    let ``movetree should not change the tree label`` (label: string, x: float, y: float, subtrees: list<Tree<'a>>) =
-        let tree = Node((label, x), subtrees)
-        let movedTree = movetree (tree, y)
-        match movedTree with
-        | Node((movedLabel, _), _) -> movedLabel = label
-
-    [<Property>]
-    let ``movetree should add y to the tree x position`` (label: string, x: float, y: float, subtrees: list<Tree<'a>>) =
-        let tree = Node((label, x), subtrees)
-        let movedTree = movetree (tree, y)
-        match movedTree with
-        | Node((_, movedX), _) -> movedX = x + y
+// fun mean test
+let meanSymmetryProp (a,b) = mean(a,b)=mean(b,a)
+[<Property(Arbitrary=[|typeof<NormalFloatGenerators>|])>]
+let symmetryOfMeanTest (a, b) = meanSymmetryProp (a, b)
