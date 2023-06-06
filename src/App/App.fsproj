@@ -4,16 +4,14 @@
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ExampleTrees.fs" />
     <Compile Include="TreeLines.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Library\Library.fsproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Plotly.NET" Version="4.0.0" />
   </ItemGroup>
-
 </Project>
