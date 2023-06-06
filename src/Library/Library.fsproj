@@ -4,8 +4,6 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Jensen-TreeFit.fs" />
-    <Compile Include="AlinaTreeDraw.fs" />
     <Compile Include="Library.fs" />
   </ItemGroup>
 </Project>
