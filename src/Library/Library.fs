@@ -37,7 +37,7 @@ module TreeDesign =
 
     let rec fit =
         function
-        | ((p, _) :: ps, (_, q) :: qs) -> rmax (fit (ps, qs), p - q + 1.0)
+        | ((_, p) :: ps, (q, _) :: qs) -> rmax (fit (ps, qs), p - q + 1.0)
         | _ -> 0.0
 
     // Now we extend this function to a list of subtrees, calculating a list of positions
