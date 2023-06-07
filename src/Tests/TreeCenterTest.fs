@@ -48,14 +48,11 @@ let ``test subtree with odd nodes`` () =
 [<TestCase>]
 let ``a simple three depths tree`` () = 
     let testTree = Node('a',[Node ('a', [Node ('a', []); Node ('a', [])]); Node ('a', [Node ('a', [])]);Node ('a', [])])
-    printfn "1. %A" testTree 
     let testTree' = design testTree
-    printfn "2. %A" testTree'
     let result = testTree' |> checkParentCentered
     Assert.IsTrue(result)
 
 [<Property>]
 let ``All parent should be centered above its immediate children`` (t: Tree<char>) = 
     let testTree = design t
-    printfn "1. %A" testTree 
     testTree |> checkParentCentered
