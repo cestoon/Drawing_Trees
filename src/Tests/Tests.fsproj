@@ -9,7 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="UnitTest1.fs" />
+    <Compile Include="TGenerators.fs" />
+    <Compile Include="HelperFunc.fs" />
+    <Compile Include="TreeDistanceTest.fs" />
+    <Compile Include="TreeCenterTest.fs" />
+    <Compile Include="TreeIsomorphicTest.fs" />
+    <Compile Include="TreeSymmetryTest.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
@@ -25,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Library\Library.fsproj" />
+    <ProjectReference Include="..\App\App.fsproj" />
   </ItemGroup>
 
 </Project>
