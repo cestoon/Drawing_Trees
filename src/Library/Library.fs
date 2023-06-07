@@ -112,3 +112,15 @@ module TreeDesign =
     let rec reflectpos (Node((v, x: float), subtrees)) =
         Node((v, -x), List.map reflectpos subtrees)
 
+    let absolutePositionTree t =
+        let rec absolutePositionTree' depth pos (Node((v, p), ts)) =
+            let absPos = p + pos
+            let childDepth = depth + 1.
+            Node((v, (absPos, -depth)), List.map (absolutePositionTree' childDepth absPos) ts)
+
+        absolutePositionTree' 0 0. t
+    
+    let absDesign t = t |> design |> absolutePositionTree
+    
+    let rec reflectAbs (Node((v, (x, y)), subtrees)): Tree<'a*(float*float)> =
+        Node((v, (-x, y)), List.map reflectAbs subtrees)
