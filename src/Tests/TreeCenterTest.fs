@@ -11,9 +11,9 @@ let rec checkParentCentered (Node((_, pos), subtrees): Tree<(char * float)>) =
         match subtrees with
         | [] -> true
         | _ -> 
-            let childPos = subtrees |> List.map (fun (Node((_, pos), _)) -> pos)
-            let avgChildPos = childPos |> List.average
-            abs(avgChildPos - pos) < 0.000001 && (subtrees |> List.forall checkParentCentered)
+            let childPos = subtrees |> List.map (fun (Node((_, childPos), _)) -> childPos + pos)
+            let avgPos = childPos |> List.average
+            abs(avgPos - pos) < 0.000001 && (subtrees |> List.forall checkParentCentered)
 
 [<TestCase>]
 let ``test no subtree`` () = 
@@ -51,8 +51,8 @@ let ``A parent should be centered above its immediate children`` (t: Tree<char>)
     testTree |> checkParentCentered
 
 [<TestCase>]
-let ``a simple three depths tree`` () = 
-    let testTree = Node ('a', [Node ('a', [Node ('a', []);Node ('a', [])]); Node ('a', [])])
+let ``testtt`` () = 
+    let testTree = Node('a',[Node ('a', [Node ('a', [])]); Node ('a', [Node ('a', [])]); Node('a', [])])
     printfn "1. %A" testTree 
     let testTree' = design testTree
     printfn "2. %A" testTree'
