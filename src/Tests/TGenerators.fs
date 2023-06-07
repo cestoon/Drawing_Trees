@@ -1,4 +1,4 @@
-module TGenerators
+module Tests.TGenerators
 
 open FsCheck
 open Library.TreeDesign

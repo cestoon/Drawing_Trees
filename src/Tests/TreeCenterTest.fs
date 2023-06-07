@@ -1,4 +1,4 @@
-module TreeCenterTest
+module Tests.TreeCenterTest
 
 open NUnit.Framework
 open FsCheck
@@ -19,4 +19,5 @@ let ``Design generates valid char trees`` (t: Tree<char>) =
 [<Property>]
 let ``A parent should be centered above its immediate children`` (t:Tree<'a>) = 
     true
+    // position
     

@@ -1,4 +1,4 @@
-module Tests
+module Tests.HelperFunc
 
 open NUnit.Framework
 open FsCheck

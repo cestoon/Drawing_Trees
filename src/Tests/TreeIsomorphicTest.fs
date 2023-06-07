@@ -1,4 +1,4 @@
-module TreeIsomorphicTest
+module Tests.TreeIsomorphicTest
 
 open NUnit.Framework
 open FsCheck
@@ -16,3 +16,9 @@ let ``Isomorphic subtrees have isomorphic renderings`` (t: Tree<'a*float>) =
     let positionTree = absolutePositionTree t
 
     true
+
+    // relative distance
+// structurely equal -> node the same??
+
+// subtree as argument?? 
+// [<Property>]

@@ -458,3 +458,4 @@ Scripts/
 # Don't include scartch files
 **/scratch.fs[x] 
 out/
+.history/

@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <Compile Include="TGenerators.fs" />
-    <Compile Include="UnitTest1.fs" />
+    <Compile Include="HelperFunc.fs" />
     <Compile Include="TreeDistanceTest.fs" />
     <Compile Include="TreeCenterTest.fs" />
     <Compile Include="TreeIsomorphicTest.fs" />
