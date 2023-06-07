@@ -6,3 +6,6 @@ open FsCheck.NUnit
 open Library
 
 // Drawings must be symmetric wrt. reflection. => symmetryProperty
+
+// flect once
+// flect twice
