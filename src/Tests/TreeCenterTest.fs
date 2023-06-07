@@ -12,7 +12,9 @@ let rec checkParentCentered (Node((_, pos), subtrees): Tree<(char * float)>) =
         | [] -> true
         | _ -> 
             let childPos = subtrees |> List.map (fun (Node((_, childPos), _)) -> childPos + pos)
-            let avgPos = childPos |> List.average
+            let minPos = childPos |> List.min
+            let maxPos = childPos |> List.max
+            let avgPos = (minPos + maxPos) / 2.0
             abs(avgPos - pos) < 0.000001 && (subtrees |> List.forall checkParentCentered)
 
 [<TestCase>]
