@@ -28,7 +28,7 @@ let checkDistance nodes =
         |> Array.forall (fun ((_, x1), (_, x2)) -> x2 - x1 >= 1.0)
     
 [<Property>]
-let ``all_distance_of_node_is_>=1.0`` (t:Tree<char>) = 
+let ``all_distance_of_node_is_bigger_than_1.0`` (t:Tree<char>) = 
     let absDt = absDesign t
     let nodesAtEachLevel = collectNodes absDt |> List.groupBy fst
     let result =
