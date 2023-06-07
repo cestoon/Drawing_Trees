@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Library\Library.fsproj" />
+    <ProjectReference Include="..\App\App.fsproj" />
   </ItemGroup>
 
 </Project>
