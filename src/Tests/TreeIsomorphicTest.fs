@@ -6,19 +6,31 @@ open FsCheck.NUnit
 open Library.TreeDesign
 open Lines
 
+let rec checkPositionalEquality (Node((l, p), ts)) (Node((l', p'), ts')) =
+    let notEqual t1 t2 = not <| checkPositionalEquality t1 t2
+
+    l = l'
+    && p = p'
+    && not <| List.exists2 (notEqual) (List.sort ts) (List.sort ts')
+
 
 // Isomorphic subtrees have isomorphic renderings. => Isomorphic
 [<Property>]
-let ``Isomorphic subtrees have isomorphic renderings`` (t: Tree<'a*float>) =
-    // 1. get absolute position of all subtree => absolutePositionTree
-    // 2. get the list of their position
-    // 3. check the position is identical
-    let positionTree = absolutePositionTree t
+let ``Isomorphic subtrees have isomorphic renderings`` (t: Tree<string>) =
 
-    true
+    let t = Node("", [])
+    let tt = Node("root", [ t; t ])
 
-    // relative distance
-// structurely equal -> node the same??
+    let designedTree = design tt
 
-// subtree as argument?? 
-// [<Property>]
+    let getSubTrees' (Node((l, p), subTrees)) =
+        match subTrees with
+        | [ l; r ] -> (l, r)
+        | _ -> failwith "too many children"
+
+    let (x, y) = getSubTrees' designedTree
+
+    let x' = movetree (x, 0.5)
+    let y' = movetree (y, -0.5)
+
+    checkPositionalEquality x' y'
