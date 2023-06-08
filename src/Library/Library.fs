@@ -104,11 +104,11 @@ module TreeDesign =
 
     // Functions to reflect the tree to be used later
 
-    /// Reflect a non-positioned tree
+    /// Reflect a tree structurally
     let rec reflect (Node(v, subtrees)) =
         Node(v, List.map reflect (List.rev subtrees))
         
-    /// Reflect a positioned tree
+    /// Reflect a tree positionally
     let rec reflectpos (Node((v, x: float), subtrees)) =
         Node((v, -x), List.map reflectpos subtrees)
 
@@ -122,5 +122,6 @@ module TreeDesign =
     
     let absDesign t = t |> design |> absolutePositionTree
     
+    /// Reflect an absolutely positioned tree positionally
     let rec reflectAbs (Node((v, (x, y)), subtrees)): Tree<'a*(float*float)> =
         Node((v, (-x, y)), List.map reflectAbs subtrees)
