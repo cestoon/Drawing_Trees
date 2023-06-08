@@ -13,15 +13,6 @@ let nodePositions t =
     fromTree' 0 0.0 [] t
 
 
-let absolutePositionTree t =
-    let rec absolutePositionTree' depth pos (Node((l, p), ts)) =
-        let absPos = p + pos
-        let childDepth = depth + 1.
-        Node((l, (absPos, -depth)), List.map (absolutePositionTree' childDepth absPos) ts)
-
-    absolutePositionTree' 0 0. t
-
-
 let nodeToPoint t =
     let rec nodeToPoint' acc (Node((l, p), ts)) =
         let point =
