@@ -13,6 +13,22 @@ let rec checkPositionalEquality (Node((l, p), ts)) (Node((l', p'), ts')) =
     && p = p'
     && not <| List.exists2 (notEqual) (List.sort ts) (List.sort ts')
 
+let rec isIsomorphic t1 t2 =
+    match t1,t2 with
+    | Node(_, []), Node(_, []) -> true
+    | Node(_, xs), Node(_, ys) when List.length xs = List.length ys -> 
+        not <| List.exists2 (fun a b -> not <| isIsomorphic a b) xs ys
+    | _ -> false
+and isIsomorphicSubtrees xs ys =
+    let rec isomorphicHelper xs yFront yTail =
+        match xs, yTail with
+        | [], [] -> true
+        | x::xTail, y::yTail' when isIsomorphic x y -> 
+            isomorphicHelper xTail [] (yFront@yTail')
+        | _::_, y::yTail' ->  
+            isomorphicHelper xs (y::yFront) yTail'
+        | _, _ -> false
+    isomorphicHelper xs [] ys
 
 // Isomorphic subtrees have isomorphic renderings. => Isomorphic
 [<Property>]
