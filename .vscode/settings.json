@@ -1,3 +1,9 @@
 {
-    "dotnet-test-explorer.testProjectPath": "./src/**/*.fsproj"
+    "dotnet-test-explorer.testProjectPath": "./src/Tests/",
+    "dotnet-test-explorer.addProblems": true,
+    "dotnet-test-explorer.showCodeLens": true,
+    "dotnet-test-explorer.codeLensFailed": "failed",
+    "dotnet-test-explorer.codeLensPassed": "success",
+    "dotnet-test-explorer.codeLensSkipped": "skiped",
+    "dotnet-test-explorer.pathForResultFile": "./src/Tests/TestResults/"
 }
