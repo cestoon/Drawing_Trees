@@ -6,31 +6,31 @@ open FsCheck.NUnit
 open Library.TreeDesign
 open Lines
 
-let rec checkPositionalEquality (Node((l, p), ts)) (Node((l', p'), ts')) =
-    let notEqual t1 t2 = not <| checkPositionalEquality t1 t2
+let makeroot (Node((l,_), ts)) = Node((l,0.), ts)
 
-    l = l'
+let rec isStructurallyEqual (Node(_, ts)) (Node(_, ts')) =
+    List.length ts = List.length ts'
+    && List.forall2 (isStructurallyEqual) ts ts'
+
+let rec isPositionallyEqual (Node((_, p), ts)) (Node((_, p'), ts')) =
+    List.length ts = List.length ts'
     && p = p'
-    && not <| List.exists2 (notEqual) (List.sort ts) (List.sort ts')
+    && List.forall2 (isPositionallyEqual) ts ts'
+
+let rec unfoldTree (Node(_, ts) as t) = 
+    seq {
+        yield t
+        for child in ts do 
+            yield! unfoldTree child
+    }
 
 
-// Isomorphic subtrees have isomorphic renderings. => Isomorphic
 [<Property>]
-let ``Isomorphic subtrees have isomorphic renderings`` (t: Tree<string>) =
+let ``Structurally equal subtrees renders the same`` (t: Tree<string>) =
+    let dt = design t
+    let subTrees = unfoldTree dt
 
-    let t = Node("", [])
-    let tt = Node("root", [ t; t ])
-
-    let designedTree = design tt
-
-    let getSubTrees' (Node((l, p), subTrees)) =
-        match subTrees with
-        | [ l; r ] -> (l, r)
-        | _ -> failwith "too many children"
-
-    let (x, y) = getSubTrees' designedTree
-
-    let x' = movetree (x, 0.5)
-    let y' = movetree (y, -0.5)
-
-    checkPositionalEquality x' y'
+    Seq.allPairs subTrees subTrees
+    |> Seq.filter (fun (t, t') -> isStructurallyEqual t t')
+    |> Seq.map (fun (t, t') -> (makeroot t, makeroot t'))
+    |> Seq.forall (fun (t, t') -> isPositionallyEqual t t')
