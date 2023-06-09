@@ -14,7 +14,7 @@ let rec collectNodes (Node((v, (x, y)), subtrees): Tree<('a * (float * float))>)
     | _ -> (y, x) :: (List.collect collectNodes subtrees)
 
 [<Property>]
-let ``no_duplicate_position_for_all_node`` (t: Tree<char * (float * float)>) =
+let ``no_duplicate_position_for_all_node`` (t: Tree<char>) =
     let absDt = absDesign t
     let nodes = collectNodes absDt
     let distinctNodes = List.distinct nodes

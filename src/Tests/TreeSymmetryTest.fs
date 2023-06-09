@@ -5,6 +5,7 @@ open NUnit.Framework
 open Library.TreeDesign
 open FsCheck
 open FsCheck.NUnit
+open Tests.TGenerators
 
 
 // Drawings must be symmetric wrt. reflection. => symmetryProperty
@@ -98,3 +99,9 @@ let ``Absolute tree symetrical with regards to reflection`` (t: Tree<char>) =
     let t1 = absDesign t
     let t2 = t |> reflect |> absDesign |> reflectAbs 
     checkPositionalEquality t1 t2
+
+[<Property(Arbitrary=[|typeof<SymmetricTreeGenerator>|])>]
+let ``symmetric trees will be rendered symmetrically`` (t: Tree<int>) =
+    let rt = design t
+    let rdt = t |> design |> reflectpos
+    checkPositionalEquality rt rdt
