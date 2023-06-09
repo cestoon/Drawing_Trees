@@ -2,6 +2,7 @@ module Tests.TGenerators
 
 open FsCheck
 open Library.TreeDesign
+open System
 
 // --------------- NormalFloat Generator ---------------
 let normalFloatGenerator =
@@ -11,22 +12,34 @@ let normalFloatGenerator =
 type NormalFloatGenerators =
     static member float() = Arb.fromGen normalFloatGenerator
 
-// // --------------- Tree Generator ---------------
-// // Node((l, x: float, subtrees)
-// let tree<'a> =
-//     let rec tree' s =
-//         match s with
-//         | 0 -> Gen.map (fun (l) -> Node(l, [])) Arb.generate<'a>
-//         | n when n>0 ->
-//             let subtrees = tree' (n/2)  |> Gen.sample 0 5 |> Gen.constant 
-//             Gen.map2 (fun (l) ts -> Node(l, ts)) Arb.generate<'a> subtrees 
-//         | _ -> invalidArg "s" "Only positive args are allowed"
-//     Gen.sized tree'
+let safeSymmetricTreeGenerator() =
+    let rec treeGen (n: int) =
+        match n with
+        | 0 ->
+            let label = Arb.generate<int>
+            Gen.map (fun (label) -> Node(label, [])) label
+        | _ ->  
+            let rnd = new Random()
+            let nNext = 
+                rnd.Next(0, n)
+            let label = Gen.constant nNext
+            let subtree = 
+                treeGen nNext
+                |> Gen.sample 0 nNext
+                |> Gen.constant
+            Gen.map2 (fun label subtree -> Node(label,subtree)) label subtree
+    treeGen 20
 
-// type TreeGenerator =
-//     static member Tree() =
-//         {new Arbitrary<Tree<char>>() with
-//             override x.Generator = tree<char>
-//             override x.Shrinker t = Seq.empty }
+let rec subtreeSeq (t:Tree<int>) = 
+    match t with 
+    | Node(label, subtreeList) -> seq subtreeList
 
-// Arb.register<TreeGenerator>() |> ignore
+type SymmetricTreeGenerator =
+    static member Tree() =
+        {new Arbitrary<Tree<int>>() with
+           override x.Generator = safeSymmetricTreeGenerator()
+           override x.Shrinker (t: Tree<int>) = subtreeSeq t
+        }
+
+Arb.register<NormalFloatGenerators>() |> ignore
+Arb.register<SymmetricTreeGenerator>() |> ignore
