@@ -1,4 +1,10 @@
-﻿namespace Library
+﻿// #############################################
+// # Authors: Alina & Mads                     #
+// # Contributor: Jinsong & BingKun            #
+// # Date: June 6th                            #
+// # Last edit: June 7th                       #
+// #############################################
+namespace Library
 
 module TreeDesign =
 

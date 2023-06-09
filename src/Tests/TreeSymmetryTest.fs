@@ -1,3 +1,9 @@
+// #############################################
+// # Authors: Mads                             #
+// # Contributors: Jinsong                     #
+// # Date: June 6th                            #
+// # Last edit: June 9th                       #
+// #############################################
 module Tests.TreeSymmetryTest
 
 

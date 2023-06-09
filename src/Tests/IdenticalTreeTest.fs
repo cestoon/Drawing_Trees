@@ -1,3 +1,9 @@
+// #############################################
+// # Authors: Alina, Mads                      #
+// # Contributors: Bingkun                     #
+// # Date: June 6th                            #
+// # Last edit: June 9th                       #
+// #############################################
 module Tests.IdenticalTreeTest
 
 open FsCheck.NUnit

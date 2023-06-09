@@ -1,3 +1,8 @@
+// #############################################
+// # Authors: Bingkun, jinsong                 #
+// # Date: June 6th                            #
+// # Last edit: June 9th                       #
+// #############################################
 module Tests.TGenerators
 
 open FsCheck

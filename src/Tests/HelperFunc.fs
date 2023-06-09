@@ -1,3 +1,8 @@
+// #############################################
+// # Authors: Bingkun                          #
+// # Date: June 7th                            #
+// # Last edit: June 7th                       #
+// #############################################
 module Tests.HelperFunc
 
 open NUnit.Framework

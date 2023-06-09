@@ -1,3 +1,10 @@
+// #############################################
+// # Authors: Mads                             #
+// # Date: June 6th                            #
+// # Last edit: June 6th                       #
+// # Last metadata edit: June 7th              #
+// #############################################
+
 module ExampleTrees
     open Library.TreeDesign
     open System

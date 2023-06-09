@@ -1,4 +1,10 @@
-﻿open System.IO
+﻿// #############################################
+// # Authors: Alina & Mads                     #
+// # Date: June 6th                            #
+// # Last edit: June 6th                       #
+// #############################################
+
+open System.IO
 open Library.TreeDesign
 
 open Plotly.NET

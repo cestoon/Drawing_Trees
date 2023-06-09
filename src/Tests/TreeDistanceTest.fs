@@ -1,3 +1,9 @@
+// #############################################
+// # Authors: Bingkun                          #
+// # Contributors: jinsong, Mads               #
+// # Date: June 6th                            #
+// # Last edit: June 9th                       #
+// #############################################
 module TreeDistanceTest
 
 open NUnit.Framework

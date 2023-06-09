@@ -1,3 +1,8 @@
+// #############################################
+// # Authors: Alina & Mads                     #
+// # Date: June 6th                            #
+// # Last edit: June 7th                       #
+// #############################################
 module Lines
 
 open Library.TreeDesign
