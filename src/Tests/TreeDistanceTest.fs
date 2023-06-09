@@ -11,7 +11,7 @@ open FsCheck.NUnit
 let rec collectNodes (Node((v, (x, y)), subtrees): Tree<('a * (float * float))>) =
     match subtrees with
     | [] -> [(y, x)]
-    | _ -> [(y, x)] @ (List.collect collectNodes subtrees)
+    | _ -> (y, x) :: (List.collect collectNodes subtrees)
 
 [<Property>]
 let ``no_duplicate_position_for_all_node`` (t: Tree<char * (float * float)>) =
