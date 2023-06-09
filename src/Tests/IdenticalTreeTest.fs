@@ -1,10 +1,7 @@
-module Tests.TreeIsomorphicTest
+module Tests.IdenticalTreeTest
 
-open NUnit.Framework
-open FsCheck
 open FsCheck.NUnit
 open Library.TreeDesign
-open Lines
 
 let makeroot (Node((l,_), ts)) = Node((l,0.), ts)
 
