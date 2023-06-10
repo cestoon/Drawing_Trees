@@ -2,14 +2,12 @@
 // # Authors: Mads                             #
 // # Contributors: Jinsong                     #
 // # Date: June 6th                            #
-// # Last edit: June 9th                       #
+// # Last edit: June 10th                      #
 // #############################################
 module Tests.TreeSymmetryTest
 
 
-open NUnit.Framework
 open Library.TreeDesign
-open FsCheck
 open FsCheck.NUnit
 open Tests.TGenerators
 
@@ -67,7 +65,7 @@ let rec checkAbsPositionalEquality (Node((_, p), ts)) (Node((_, p'), ts')) =
 [<Property>]
 let ``reflect relative tree once to check is position negative`` (t:Tree<char>) = 
     let dt = design t
-    let rt = reflectpos dt
+    let rt = reflect t |> design
     checkRelativeReflection dt rt 
 
 // flect twice
